@@ -1,0 +1,160 @@
+{
+  "title": "Llama.Cpp Runpod Runner",
+  "description": "Run llama.cpp compatible and quantized GGUF models on Runpod. This runner starts a llama_cpp.server in the background and processes requests through it. Compatible with RTX 30xx/40xx/50xx series, Ada/Ampere professional cards, and datacenter GPUs.",
+  "type": "serverless",
+  "category": "language",
+  "iconUrl": "https://example.com/icon.png",
+  "config": {
+    "runsOn": "GPU",
+    "containerDiskInGb": 60,
+    "gpuIds": [
+      "NVIDIA GeForce RTX 3070",
+      "NVIDIA GeForce RTX 3080",
+      "NVIDIA GeForce RTX 3080 Ti",
+      "NVIDIA GeForce RTX 3090",
+      "NVIDIA GeForce RTX 3090 Ti",
+      "NVIDIA GeForce RTX 4070 Ti",
+      "NVIDIA GeForce RTX 4080",
+      "NVIDIA GeForce RTX 4080 SUPER",
+      "NVIDIA GeForce RTX 4090",
+      "NVIDIA GeForce RTX 5080",
+      "NVIDIA GeForce RTX 5090",
+      "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "NVIDIA RTX PRO 6000 Blackwell Workstation Edition",
+      "NVIDIA A30",
+      "NVIDIA A40",
+      "NVIDIA A100 80GB PCIe",
+      "NVIDIA A100-SXM4-80GB",
+      "NVIDIA B200",
+      "NVIDIA H100 80GB HBM3",
+      "NVIDIA H100 NVL",
+      "NVIDIA H100 PCIe",
+      "NVIDIA H200",
+      "NVIDIA L4",
+      "NVIDIA L40",
+      "NVIDIA L40S"
+    ],
+    "allowedCudaVersions": ["12.4"],
+    "env": [
+      {
+        "key": "HUGGING_FACE_TOKEN",
+        "input": {
+          "name": "Hugging Face Token",
+          "type": "string",
+          "description": "Your Hugging Face API token to download models. Required.",
+          "secret": true
+        }
+      },
+      {
+        "key": "HF_MODEL_REPO",
+        "input": {
+          "name": "Hugging Face Model Repository",
+          "type": "string",
+          "description": "The Hugging Face model repository (e.g., 'org/model-name'). Required.",
+          "default": "Direness933/AGAPES1_ES_M-Q4_K_M-GGUF",
+          "required": true
+        }
+      },
+      {
+        "key": "HF_MODEL_FILE",
+        "input": {
+          "name": "Hugging Face Model File",
+          "type": "string",
+          "description": "The specific GGUF model file name to download (e.g., 'model.gguf'). Required.",
+          "default": "agapes1_es_m-q4_k_m.gguf",
+          "required": true
+        }
+      },
+      {
+        "key": "API_TOKEN",
+        "input": {
+          "name": "API Authentication Token",
+          "type": "string",
+          "description": "Optional API token for authenticating requests to the llama.cpp server. If not set, no authentication is required.",
+          "secret": true
+        }
+      },
+      {
+        "key": "SERVER_PORT",
+        "input": {
+          "name": "Llama.cpp Server Port",
+          "type": "number",
+          "description": "The port for the internal llama_cpp server.",
+          "default": 9095
+        }
+      },
+      {
+        "key": "N_GPU_LAYERS",
+        "input": {
+          "name": "Number of GPU Layers",
+          "type": "number",
+          "description": "Number of layers to offload to the GPU (-1 for all layers).",
+          "default": -1
+        }
+      },
+      {
+        "key": "N_CTX",
+        "input": {
+          "name": "Context Window Size",
+          "type": "number",
+          "description": "The context window size (n_ctx) for the model.",
+          "default": 40000
+        }
+      },
+      {
+        "key": "N_BATCH",
+        "input": {
+          "name": "Batch Size",
+          "type": "number",
+          "description": "The batch size (n_batch) for prompt processing.",
+          "default": 512
+        }
+      },
+      {
+        "key": "N_THREADS",
+        "input": {
+          "name": "Number of Threads",
+          "type": "number",
+          "description": "Number of threads to use for generation.",
+          "default": 8
+        }
+      },
+      {
+        "key": "OFFLOAD_KQV",
+        "input": {
+          "name": "Offload K/Q/V to GPU",
+          "type": "boolean",
+          "description": "Whether to offload Key/Query/Value tensors to GPU.",
+          "default": true
+        }
+      },
+      {
+        "key": "USE_MLOCK",
+        "input": {
+          "name": "Use mlock",
+          "type": "boolean",
+          "description": "Whether to use mlock (lock model in RAM to prevent swapping).",
+          "default": true
+        }
+      },
+      {
+        "key": "ROPE_FREQ_SCALE",
+        "input": {
+          "name": "RoPE Frequency Scale",
+          "type": "number",
+          "description": "RoPE frequency scaling factor for models that support it.",
+          "default": 4.0
+        }
+      },
+      {
+        "key": "CHAT_FORMAT",
+        "input": {
+          "name": "Chat Format",
+          "type": "string",
+          "description": "The chat format to use for the model (e.g., 'gemma', 'chatml', 'llama-2').",
+          "default": "gemma"
+        }
+      }
+    ]
+  }
+}

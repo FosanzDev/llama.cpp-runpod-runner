@@ -1,0 +1,73 @@
+{
+  "tests": [
+    {
+      "name": "basic_prompt_test",
+      "input": {
+        "prompt": "Hello world, how are you today? Please respond concisely."
+      },
+      "timeout": 900000
+    },
+    {
+      "name": "advanced_prompt_test",
+      "input": {
+        "prompt": "Write a short poem about artificial intelligence.",
+        "max_tokens": 200,
+        "temperature": 0.8
+      },
+      "timeout": 900000
+    }
+  ],
+  "config": {
+    "gpuTypeId": "NVIDIA GeForce RTX 4090",
+    "gpuCount": 1,
+    "env": [
+      {
+        "key": "HF_MODEL_REPO",
+        "value": "QuantFactory/Meta-Llama-3-8B-Instruct-GGUF"
+      },
+      {
+        "key": "HF_MODEL_FILE",
+        "value": "Meta-Llama-3-8B-Instruct.Q4_0.gguf"
+      },
+      {
+        "key": "SERVER_PORT",
+        "value": "9095"
+      },
+      {
+        "key": "N_GPU_LAYERS",
+        "value": "-1"
+      },
+      {
+        "key": "N_CTX",
+        "value": "40000"
+      },
+      {
+        "key": "N_BATCH",
+        "value": "512"
+      },
+      {
+        "key": "N_THREADS",
+        "value": "8"
+      },
+      {
+        "key": "OFFLOAD_KQV",
+        "value": "true"
+      },
+      {
+        "key": "USE_MLOCK",
+        "value": "true"
+      },
+      {
+        "key": "ROPE_FREQ_SCALE",
+        "value": "4.0"
+      },
+      {
+        "key": "CHAT_FORMAT",
+        "value": "llama-3"
+      }
+    ],
+    "allowedCudaVersions": [
+      "12.4"
+    ]
+  }
+}
